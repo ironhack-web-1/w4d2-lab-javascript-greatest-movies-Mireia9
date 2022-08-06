@@ -61,33 +61,31 @@ function scoresAverage(moviesArray) {
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore(moviesArray) {
-    if (moviesArray.length === 0) {
-        return 0;
-    }
 
-    return moviesArray
-        .filter(movie => movie.genre.includes("Drama"))
-        .filter(movie => movie.director === "score")
-        
-        const sum = moviesArray.reduce((accumulator, currentValue) => {
-            if (currentValue.score) return accumulator + currentValue.score
-            else return accumulator
-        }, 0)
-        const average = (sum / moviesArray.length).toFixed(2);
+   const dramaMovies =  moviesArray
+        .filter(movie => movie.genre.includes("Drama"));
     
-        return Number(average);
+        if (dramaMovies.length === 0) {
+            return 0;
+        }
+    
+        
+    const sum = dramaMovies.reduce ((accumulator, currentValue) => {
+        if (currentValue.score) return accumulator + currentValue.score;
+        else return accumulator
+    },0);
 
-
+    const dramaAverage = (sum / dramaMovies.length).toFixed(2);
+    return Number(dramaAverage);
  }
+
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(moviesArray) { 
-    if (moviesArray.length === 0) {
-        return 0;
-    }
-    const newarray = newarray.concat(moviesArray)
-   return newarray.sort ((a,b) => a.year-b.year). sort ((a,b) => a.title-b.title)
-   
+    
+   const newarray = [...moviesArray];
+   const byYearOrdered = newarray.sort ((a,b) => a.year-b.year);
+   return byYearOrdered.sort ((a,b) => a.title-b.title);
 }
 
 
@@ -102,7 +100,30 @@ function orderAlphabetically(moviesArray) {
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes(moviesArray) { }
 
+/*** 
+function turnHoursToMinutes(moviesArray) { y
+    const newArray = [...moviesArray]
+    const separaArray = newArray.duration.split (" ");
+    const horesAminuts = Number separaArray[0].slice(0,-1)*60;
+    const minuts = Number separaArray[0].slice(0,-3);
+    const total = horesAminuts + minuts
+
+}
+*/
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
-function bestYearAvg(moviesArray) { }
+function bestYearAvg(moviesArray) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+ }
