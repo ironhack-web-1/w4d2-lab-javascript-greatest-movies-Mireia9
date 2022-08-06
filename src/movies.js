@@ -62,33 +62,38 @@ function scoresAverage(moviesArray) {
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore(moviesArray) {
 
-   const dramaMovies =  moviesArray
+    const dramaMovies = moviesArray
         .filter(movie => movie.genre.includes("Drama"));
-    
-        if (dramaMovies.length === 0) {
-            return 0;
-        }
-    
-        
-    const sum = dramaMovies.reduce ((accumulator, currentValue) => {
+
+    if (dramaMovies.length === 0) {
+        return 0;
+    }
+
+
+    const sum = dramaMovies.reduce((accumulator, currentValue) => {
         if (currentValue.score) return accumulator + currentValue.score;
         else return accumulator
-    },0);
+    }, 0);
 
     const dramaAverage = (sum / dramaMovies.length).toFixed(2);
     return Number(dramaAverage);
- }
-
-
-// Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear(moviesArray) { 
-    
-   const newarray = [...moviesArray];
-   const byYearOrdered = newarray.sort ((a,b) => a.year-b.year);
-   return byYearOrdered.sort ((a,b) => a.title-b.title);
 }
 
 
+// Iteration 5: Ordering by year - Order by year, ascending (in growing order)
+function orderByYear(moviesArray) {
+
+    const newarray = [...moviesArray];
+    return newarray
+        .sort((a, b) => {
+            if (a.title > b.title) return 1;
+            else return -1;
+
+        })
+        .sort((a, b) => a.year - b.year);
+
+
+}
 
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
@@ -101,16 +106,58 @@ function orderAlphabetically(moviesArray) {
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 
-/*** 
+/*
 function turnHoursToMinutes(moviesArray) { y
     const newArray = [...moviesArray]
     const separaArray = newArray.duration.split (" ");
-    const horesAminuts = Number separaArray[0].slice(0,-1)*60;
-    const minuts = Number separaArray[0].slice(0,-3);
+    const horesAminuts = Number (separaArray[0].slice(0,-1)*60);
+    const minuts = Number (separaArray[1].slice(0,-3));
     const total = horesAminuts + minuts
+    return total
+}
+
+*/
+function converHours (horas){
+    const calcularHoras = horas.split("h");
+    return Number (calcularHoras[0])*60;
+}
+
+function converMinutos (minutos){
+    const calcularMinutos = minutos.split("min");
+    return Number (calcularMinutos[0]);
+}
+
+function convertDuration (duration){
+    const minutes = duration.split (" ");
+
+
+
+
+    
+    return minutes.reduce ((accumulator, currentValue) => {
+        if (currentValue.includes("h")){
+            return accumulator + converHours(currentValue)
+        }
+        if (currentValue.includes ("min")){
+        return accumulator + converMinutos(currentValue)
+    
+}
+return accumulator
+
+    },0)
 
 }
-*/
+
+function turnHoursToMinutes(moviesArray) { 
+    const newArray = [...moviesArray]
+    return newArray.map((movie) => {
+      movie.duration = Number (convertDuration (movie.duration))
+      return movie
+    })
+    
+}
+
+
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(moviesArray) {
 
@@ -126,4 +173,4 @@ function bestYearAvg(moviesArray) {
 
 
 
- }
+}
